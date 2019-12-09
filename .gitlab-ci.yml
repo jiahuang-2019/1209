@@ -1,0 +1,21 @@
+image: node:latest
+
+pages:
+  cache:
+    paths:
+    - node_modules/
+
+  stage: deploy
+  script:
+  - npm install -g @angular/cli
+  - npm install -g typescript
+  - npm install
+  - ng build  --aot --prod --output-hashing none
+  - mkdir public
+  - mv dist/robi3-new-interface/* public/
+  artifacts:
+    paths:
+    - public
+  only:
+  - master
+
